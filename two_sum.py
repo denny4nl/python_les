@@ -7,15 +7,16 @@ class Solution:
         """
         length = len(nums)
         for i in range(0, length):
-            for j in range(i + 1, length):
-                if nums[i] + nums[j] == target:
-                    yield i, j
-
+            target_in_arr = target - nums[i]
+            try:
+                j = nums[i+1:].index(target_in_arr)
+            except ValueError as e:
+                print(e)
+            else:
+                return (i, j+i+1)
 
 if __name__ == "__main__":
-    nums = [2, 7, 11, 15]
-    target = 22
+    nums = [5, 7, 3, 3, 4]
+    target = 6
     sol = Solution()
-    print(list(sol.twoSum(nums, target)))
-    for i in sol.twoSum(nums, target):
-        print(i)
+    print(sol.twoSum(nums, target))
